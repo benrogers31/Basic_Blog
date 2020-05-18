@@ -1,0 +1,52 @@
+<!-- This uses template inheritance extends from base.html -->
+{% extends "blog/base.html" %}
+ <!-- This is marks where it should be indented from --> 
+{% block content %}    
+    <!-- HERE IS HOW WE WRITE CODE FOR VARIABLES INPUTED IN VIEWS      -->
+    <!-- THIS IS A FOR LOOP (similar for if statements and shit -->
+    <!-- dont have spaces between percent signs and brackets-->
+    {% for post in posts %}
+        <!-- IF WE WANT TO ACCESS A VARIABBLE WE USE those braces-->
+        <article class="media content-section">
+          <!-- rounded circle is bootstrap class and article img is a custom class-->
+          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                <!-- this is how we adjust for the data that we want to deal with, check the documentation for specifics-->
+                <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+              </div>
+              <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+              <p class="article-content">{{ post.content }}</p>
+            </div>
+          </article>
+    {% endfor %}
+    {% if is_paginated %}
+    
+    <div class="d-flex justify-content-center align-items-center">
+      <!-- this is the current page that we are on --> 
+        {% if page_obj.has_previous %}
+          <!-- this goes to the first page of our pagination-->
+          <!--<a class="mr-2 mb-4" href="?page={{ page_obj.previous_page_number }}"> Previous </a>-->
+          <a class="btn btn-outline-info ml-1 mb-4" href="?page=1"> First </a>
+         
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <a class="btn btn-info ml-1 mb-4" href="?page={{ num }}"> {{ num }} </a>
+          
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
+          <a class="btn btn-outline-info ml-1 mb-4" href="?page={{ num }}"> {{ num }} </a>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+     
+          <a class="btn btn-outline-info ml-1 mb-4" href="?page={{ page_obj.paginator.num_pages }}"> Last </a> 
+          <!--<a class="float-right ml-2 mb-4" href="?page={{ page_obj.next_page_number }}"> Next </a>-->
+          
+        {% endif %}
+      </div>
+    {% endif %}
+{% endblock content %}

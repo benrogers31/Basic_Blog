@@ -50,11 +50,12 @@ urlpatterns = [
     #################
     path('', include('blog.urls')),
 
+    #This is for the ckeditor
+    path('ckeditor/',include('ckeditor_uploader.urls')),
     
-
     
-    
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#this line above ensures the images can be recieved in development mode
 
 #this is how we access the images when we are in debug mode
 if settings.DEBUG:

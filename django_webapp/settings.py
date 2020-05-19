@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
     'django_cleanup',
+    'ckeditor',
+    'ckeditor_uploader',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+#this will be where the images are stored that are uploaded through the skeditor
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,6 +127,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+################## THIS IS FOR USING THE ADVANCED EDITOR ######################
+#Static assest like CSS and javascript are loaded automatically when using development server
+#when we have this in APPS USED 'django.contrib.staticfiles' and we are in debug mode
+#When we make our static root this we can then use those static files 
+STATIC_ROOT = 'static/'
+#then we run python3 manage.py collectstatic
+###############################################################################
 
 #media root is full path to a directory where we would like django to store out uploaded files
 #os.path.join ensures no matter the operating system that path works 

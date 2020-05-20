@@ -51,12 +51,25 @@ urlpatterns = [
     path('', include('blog.urls')),
 
     #This is for the ckeditor
-    path('ckeditor/',include('ckeditor_uploader.urls')),
+    #path('ckeditor/',include('ckeditor_uploader.urls')),
+  
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #this line above ensures the images can be recieved in development mode
 
+##### this imports the ckeditor but doesnt use the default implementation #####
+##### The defualt only let admin users upload pictures ######
+from django.contrib.auth.decorators import login_required
+from ckeditor_uploader.views import upload
+from django.conf.urls import url
+
+urlpatterns += [
+    url(r'^ckeditor/upload/', login_required(upload), name='ckeditor_upload'),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+]
+
 #this is how we access the images when we are in debug mode
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+##############################

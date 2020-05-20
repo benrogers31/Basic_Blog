@@ -171,8 +171,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_PWD')
+EMAIL_HOST_USER = "robosendermyfakebot@gmail.com"
+#This is an enviroment variable for the email's password
+EMAIL_HOST_PASSWORD =  os.environ.get('BASIC_BOT_EMAIL_PWD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 

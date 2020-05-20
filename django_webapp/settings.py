@@ -45,8 +45,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-#this will be where the images are stored that are uploaded through the skeditor
-CKEDITOR_UPLOAD_PATH = "uploads/"
+#This is the skeditor jquery 
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+ #this will be where the images are stored that are uploaded through the skeditor
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+'default': {
+   #You can change this based on your requirements.
+    'width': 'auto',
+
+          },
+    }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,8 +143,9 @@ STATIC_URL = '/static/'
 #Static assest like CSS and javascript are loaded automatically when using development server
 #when we have this in APPS USED 'django.contrib.staticfiles' and we are in debug mode
 #When we make our static root this we can then use those static files 
-STATIC_ROOT = 'static/'
+#STATIC_ROOT = 'static/'
 #then we run python3 manage.py collectstatic
+#THIS METHOD SEEMED REAL CLUNKY SO I'M GONNA TRY SOMETHING DIFFERENT BUT NOT DELETE IT
 ###############################################################################
 
 #media root is full path to a directory where we would like django to store out uploaded files
@@ -162,3 +174,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_PWD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+

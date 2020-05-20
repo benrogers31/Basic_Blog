@@ -13,6 +13,7 @@
                 <legend class="border-bottom mb-4"> Blog Post  </legend>
                 <!-- this retrieves the form variable that we need, as_p renders it in paragraph form -->
                 <!-- But instead of as_p we are gonna use crispy forms -->
+                {{ form.media }}
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">

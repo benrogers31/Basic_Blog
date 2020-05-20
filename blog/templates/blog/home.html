@@ -18,6 +18,17 @@
               </div>
               <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
               <p class="article-content">{{ post.content|safe }}</p>
+              <script>
+                	var articles =  document.getElementsByClassName("article-content")
+                  var images = document.getElementsByTagName("img")
+	                for (img of images ){
+		                  if (img.getAttribute("class")==="rounded-circle article-img"){
+                        continue
+                      }
+                      img.setAttribute("style", "height:auto; width:100%")
+	                }
+              </script>
+        
             </div>
           </article>
     {% endfor %}

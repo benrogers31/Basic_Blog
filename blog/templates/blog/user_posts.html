@@ -12,7 +12,19 @@
                 <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
               </div>
               <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-              <p class="article-content">{{ post.content }}</p>
+              <p class="article-content">{{ post.content|safe }}</p>
+              <script>
+                  //This gets all the images that would be in the article section
+                  var articles =  document.getElementsByClassName("article-content")
+                  var images = document.getElementsByTagName("img")
+                  //Resizing them to fit the width of their container
+                  for (img of images ){
+                      if (img.getAttribute("class")==="rounded-circle article-img"){
+                          continue
+                      }
+                      img.setAttribute("style", "height:auto; width:100%")
+                  }
+                </script>
             </div>
           </article>
     {% endfor %}
